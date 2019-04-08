@@ -1,0 +1,19 @@
+version: "3.4"
+services:
+  api:
+    image: ${DOCKER_REPO}/data-gateway:${ENV_NAME}
+    ports:
+      - 30010:30010
+    networks:
+      - data-gateway
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 1
+        delay: 30s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  data-gateway:
+    external: false
